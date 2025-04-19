@@ -61,18 +61,15 @@ if not os.path.exists('model/model_lr.pkl'):
 app = FastAPI()
 mangum = Mangum(app)
 
-# สร้าง API Input สำหรับข้อความที่ต้องการประมวลผล
 class TextInput(BaseModel):
     text: str
 
-# สร้าง endpoint สำหรับรับข้อความและประมวลผล
 @app.post("/")
 async def predict(text_input: TextInput):
-    # รับข้อความจากผู้ใช้
     text = text_input.text
-    
-    # ใช้ฟังก์ชัน Sentence เพื่อแปลงข้อความ
     result = Sentence([text])
-    
-    # ส่งผลลัพธ์ที่แปลงเป็นเวกเตอร์กลับไป
     return {"result": result}
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
