@@ -57,9 +57,8 @@ if not os.path.exists('model/model_lr.pkl'):
     x_train, x_test, y_train, y_test = SampleData(fakenews_data, truenews_data)
     y_pred, name = Support_Vector_Machine(x_train, x_test, y_train, y_test)
     Classification_Report(name, y_test, y_pred)
-
+    
 app = FastAPI()
-mangum = Mangum(app)
 
 class TextInput(BaseModel):
     text: str
@@ -67,7 +66,7 @@ class TextInput(BaseModel):
 @app.post("/")
 async def predict(text_input: TextInput):
     text = text_input.text
-    result = Sentence([text])
+    result = Sentence([text])  # สมมุติว่า Sentence เป็นฟังก์ชันที่คุณใช้
     return {"result": result}
 
 if __name__ == "__main__":
