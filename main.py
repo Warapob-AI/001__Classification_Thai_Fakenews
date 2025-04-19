@@ -57,7 +57,7 @@ if not os.path.exists('model/model_lr.pkl'):
     x_train, x_test, y_train, y_test = SampleData(fakenews_data, truenews_data)
     y_pred, name = Support_Vector_Machine(x_train, x_test, y_train, y_test)
     Classification_Report(name, y_test, y_pred)
-    
+
 app = FastAPI()
 
 class TextInput(BaseModel):
@@ -70,5 +70,5 @@ async def predict(text_input: TextInput):
     return {"result": result}
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
+    port = int(os.environ.get("PORT", 10000))
     uvicorn.run("main:app", host="0.0.0.0", port=port)
