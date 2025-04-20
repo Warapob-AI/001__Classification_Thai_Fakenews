@@ -30,9 +30,8 @@ pip install -r requirements.txt
 
 ### รันโค้ดเพื่อฝึกโมเดล
 ```bash
-sentence = str(input('\nEnter Sentence : '))
-models = joblib.load('model.lr.pkl')
-result = Sentence([sentence], models)
+# รัน terminal or cmd ใน main.py
 
-# ใส่ข้อความ input ลงใน sentence และรันได้ใน ipynb
+uvicorn main:app --reload --port 8000
+# จากนั้นก็สามารถเข้า 127.0.0.1:8000/docs เพื่อเข้า fastapi ไปใช้งานได้
 ```
